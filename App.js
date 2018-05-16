@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet, TextInput } from 'react-native';
+import { KeyboardAvoidingView, SafeAreaView, StyleSheet, TextInput } from 'react-native';
 import { Constants } from 'expo';
 import { Button } from 'react-native-elements';
 import { primaryButtonBackgroundColor } from './data/colors';
@@ -8,18 +8,20 @@ import { primaryButtonBackgroundColor } from './data/colors';
 export default class App extends React.Component {
   render() {
     return (
-      <SafeAreaView style={styles.container}>
-        <TextInput
-          multiline
-          style={styles.textInput}
-          placeholder="Write here what you would like to be reminded about when you get home."
-        />
-        <Button
-          large
-          backgroundColor={primaryButtonBackgroundColor}
-          textStyle={styles.primaryButtonText}
-          title="Remind Me At Home!"
-        />
+      <SafeAreaView style={{ flex: 1 }}>
+        <KeyboardAvoidingView style={styles.container} behavior="padding">
+          <TextInput
+            multiline
+            style={styles.textInput}
+            placeholder="Write here what you would like to be reminded about when you get home."
+          />
+          <Button
+            large
+            backgroundColor={primaryButtonBackgroundColor}
+            textStyle={styles.primaryButtonText}
+            title="Remind Me At Home!"
+          />
+        </KeyboardAvoidingView>
       </SafeAreaView>
     );
   }
