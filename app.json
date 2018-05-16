@@ -20,6 +20,7 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "android": { "package": "org.szeremi.remind_me_at_home" },
     "ios": {
       "supportsTablet": true
     }
