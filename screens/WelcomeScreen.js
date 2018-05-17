@@ -20,6 +20,7 @@ class WelcomeScreen extends React.Component {
   };
 
   render() {
+    // TODO ask for permissions before navigating to map.
     return (
       <Swiper loop={false}>
         <SwipeView>

@@ -14,7 +14,12 @@ export default class App extends React.Component {
           title: 'Welcome',
         },
       },
-      map: { screen: MapScreen },
+      map: {
+        screen: MapScreen,
+        navigationOptions: {
+          title: 'Home selection',
+        },
+      },
     }, {
       lazy: true,
       swipeEnabled: false,
