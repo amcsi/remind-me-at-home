@@ -56,7 +56,7 @@ class WelcomeScreen extends React.Component {
           <CenteredText>
           </CenteredText>
 
-          <Button title="Pick My Home Location" onPress={this.props.navigation.navigate('credits')} />
+          <Button title="Pick My Home Location" onPress={() => this.props.navigation.navigate('map')} />
         </SwipeView>
       </Swiper>
     );

@@ -1,26 +1,28 @@
 import React from 'react';
-import { KeyboardAvoidingView, StyleSheet, TextInput } from 'react-native';
+import { KeyboardAvoidingView, SafeAreaView, StyleSheet, TextInput } from 'react-native';
 import { Constants } from 'expo';
 import { Button } from 'react-native-elements';
 import { primaryButtonBackgroundColor } from '../data/colors';
 
 //noinspection JSUnusedGlobalSymbols
-export default class App extends React.Component {
+export default class NewReminderScreen extends React.Component {
   render() {
     return (
-      <KeyboardAvoidingView style={styles.container} behavior="padding">
-        <TextInput
-          multiline
-          style={styles.textInput}
-          placeholder="Write here what you would like to be reminded about when you get home."
-        />
-        <Button
-          large
-          backgroundColor={primaryButtonBackgroundColor}
-          textStyle={styles.primaryButtonText}
-          title="Remind Me At Home!"
-        />
-      </KeyboardAvoidingView>
+      <SafeAreaView style={{ flex: 1 }}>
+        <KeyboardAvoidingView style={styles.container} behavior="padding">
+          <TextInput
+            multiline
+            style={styles.textInput}
+            placeholder="Write here what you would like to be reminded about when you get home."
+          />
+          <Button
+            large
+            backgroundColor={primaryButtonBackgroundColor}
+            textStyle={styles.primaryButtonText}
+            title="Remind Me At Home!"
+          />
+        </KeyboardAvoidingView>
+      </SafeAreaView>
     );
   }
 }
