@@ -14,9 +14,14 @@ const CenteredText = styled.Text`
 `;
 
 class WelcomeScreen extends React.Component {
+  //noinspection JSUnusedGlobalSymbols
+  static navigationOptions = {
+    header: null,
+  };
+
   render() {
     return (
-      <Swiper>
+      <Swiper loop={false}>
         <SwipeView>
           <CenteredText>
             Welcome to
@@ -51,7 +56,7 @@ class WelcomeScreen extends React.Component {
           <CenteredText>
           </CenteredText>
 
-          <Button title="Pick My Home Location" />
+          <Button title="Pick My Home Location" onPress={this.props.navigation.navigate('credits')} />
         </SwipeView>
       </Swiper>
     );
