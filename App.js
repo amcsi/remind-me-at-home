@@ -1,5 +1,4 @@
 import React from 'react';
-import { View } from 'react-native';
 import WelcomeScreen from './screens/WelcomeScreen';
 import { createStackNavigator } from 'react-navigation';
 import MapScreen from './screens/MapScreen';
@@ -26,9 +25,7 @@ export default class App extends React.Component {
     });
 
     return (
-      <View style={{ flex: 1 }}>
-        <MainNavigator />
-      </View>
+      <MainNavigator />
     );
   }
 }
