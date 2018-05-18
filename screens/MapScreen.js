@@ -1,42 +1,34 @@
 import React from 'react';
 import { MapView } from 'expo';
 import { getCurrentPositionAsnyc } from '../src/location';
+import { connect } from 'react-redux';
+import { changeMapRegion } from '../src/actions/MapActions';
 
 class MapScreen extends React.Component {
-  state = {
-    initialRegion: void 0,
-  };
+  componentDidMount() {
+    this.scrollToCurrentLocation();
+  }
 
-  async componentDidMount() {
-    try {
-      const position = await getCurrentPositionAsnyc();
-      const { latitude, longitude } = position.coords;
-      this.setState({
-        initialRegion: {
-          latitude,
-          longitude,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }
-      })
-    } catch (e) {
-      this.setState({ initialRegion: null });
-    }
+  async scrollToCurrentLocation() {
+    const position = await getCurrentPositionAsnyc();
+    this.props.changeMapRegion(position.coords);
   }
 
   render() {
-    const { initialRegion } = this.state;
+    const { mapRegion } = this.props;
 
-    if (initialRegion !== void 0) {
-      return (
-        <MapView style={{ flex: 1 }} initialRegion={initialRegion}>
-        </MapView>
-      );
-    }
-
-    // TODO loading spinner.
-    return null;
+    return (
+      <MapView style={{ flex: 1 }} region={mapRegion}>
+      </MapView>
+    );
+    // TODO loading spinner when moving to user's current location.
   }
 }
 
-export default (MapScreen);
+function mapStateToProps({ mapRegion }) {
+  return {
+    mapRegion,
+  };
+}
+
+export default connect(mapStateToProps, { changeMapRegion })(MapScreen);

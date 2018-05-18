@@ -1,0 +1,1 @@
+export const CHANGE_MAP_REGION = 'CHANGE_MAP_REGION';
