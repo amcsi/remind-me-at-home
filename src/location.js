@@ -13,9 +13,3 @@ export async function getLocationServiceWithPermissions() {
 
   return Location;
 }
-
-export async function getCurrentPositionAsnyc() {
-  const location = await getLocationServiceWithPermissions();
-  // TODO do something about the possibility that getting the current position could fail.
-  return location.getCurrentPositionAsync();
-}
