@@ -1,4 +1,8 @@
 import { Location, Permissions } from 'expo';
+import {
+  MOCK_CURRENT_LOCATION_LATITUDE,
+  MOCK_CURRENT_LOCATION_LONGITUDE,
+} from 'react-native-dotenv';
 
 /**
  * Wrapper function for Location; ensures the location permission is enabled.
@@ -15,12 +19,11 @@ export async function getLocationServiceWithPermissions() {
 }
 
 export async function getCurrentPositionAsync() {
-  console.info('window', window);
-  if (window.__DEV__) {
+  if (MOCK_CURRENT_LOCATION_LATITUDE) {
     // Mock data.
     return {
-      latitude: 47.5282072,
-      longitude: 19.0397632,
+      latitude: Number(MOCK_CURRENT_LOCATION_LATITUDE),
+      longitude: Number(MOCK_CURRENT_LOCATION_LONGITUDE),
     };
   }
   const location = await getLocationServiceWithPermissions();
