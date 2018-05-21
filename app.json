@@ -20,7 +20,14 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "android": { "package": "org.szeremi.remind_me_at_home" },
+    "android": {
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyD12CetnP3pd8XJd0GcgHtZaB7mRwL3ZDY"
+        }
+      },
+      "package": "org.szeremi.remind_me_at_home"
+    },
     "ios": {
       "supportsTablet": true
     }
