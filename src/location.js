@@ -13,3 +13,18 @@ export async function getLocationServiceWithPermissions() {
 
   return Location;
 }
+
+export async function getCurrentPositionAsync() {
+  console.info('window', window);
+  if (window.__DEV__) {
+    // Mock data.
+    return {
+      latitude: 47.5282072,
+      longitude: 19.0397632,
+    };
+  }
+  const location = await getLocationServiceWithPermissions();
+  // TODO do something about the possibility that getting the current position could fail.
+  const { coords } = await location.getCurrentPositionAsync();
+  return { latitude: coords.latitude, longitude: coords.longitude };
+}

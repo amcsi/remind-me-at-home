@@ -1,6 +1,7 @@
 import React from 'react';
-import { Location, MapView } from 'expo';
+import { MapView } from 'expo';
 import { connect } from 'react-redux';
+import { getCurrentPositionAsync } from '../src/location';
 import { changeMapRegion } from '../src/actions/MapActions';
 
 class MapScreen extends React.Component {
@@ -9,8 +10,8 @@ class MapScreen extends React.Component {
   }
 
   async scrollToCurrentLocation() {
-    const position = await Location.getCurrentPositionAsync();
-    this.props.changeMapRegion(position.coords);
+    const coords = await getCurrentPositionAsync();
+    this.props.changeMapRegion(coords);
   }
 
   render() {
