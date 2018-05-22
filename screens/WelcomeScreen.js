@@ -20,7 +20,13 @@ class WelcomeScreen extends React.Component {
   };
 
   render() {
+    const pickHomeLocationButton =
+      <Button
+        title="Pick My Home Location"
+        onPress={() => this.props.navigation.navigate('map')}
+      />;
     // TODO ask for permissions before navigating to map.
+
     return (
       <Swiper loop={false}>
         <SwipeView>
@@ -29,10 +35,13 @@ class WelcomeScreen extends React.Component {
 
             Remind Me At Home!
           </CenteredText>
+
+          {window.__DEV__ && pickHomeLocationButton}
         </SwipeView>
         <SwipeView>
           <CenteredText>
-            When you're away from home and there is something you would like to be reminded about when you get home...
+            When you're away from home and there is something you would like to be reminded about
+            when you get home...
           </CenteredText>
         </SwipeView>
         <SwipeView>
@@ -43,11 +52,13 @@ class WelcomeScreen extends React.Component {
         </SwipeView>
         <SwipeView>
           <CenteredText>
-            Before you start using the app, there's just one thing you will need to do first: let me know where you're "home" is.
+            Before you start using the app, there's just one thing you will need to do first: let me
+            know where you're "home" is.
           </CenteredText>
           <CenteredText />
           <CenteredText>
-            Don't worry, this data won't be shared with anyone. It will be used only within this app, and will not be shared with anyone else.
+            Don't worry, this data won't be shared with anyone. It will be used only within this
+            app, and will not be shared with anyone else.
           </CenteredText>
         </SwipeView>
         <SwipeView>
@@ -57,7 +68,7 @@ class WelcomeScreen extends React.Component {
           <CenteredText>
           </CenteredText>
 
-          <Button title="Pick My Home Location" onPress={() => this.props.navigation.navigate('map')} />
+          {pickHomeLocationButton}
         </SwipeView>
       </Swiper>
     );
