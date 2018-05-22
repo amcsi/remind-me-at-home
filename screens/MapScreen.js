@@ -6,13 +6,15 @@ import { changeMapRegion } from '../src/actions/MapActions';
 import { Icon } from 'react-native-elements';
 import { View } from 'react-native';
 import styled from 'styled-components';
-import { debounce } from 'lodash';
+import { throttle } from 'lodash';
 
 const IconBar = styled.View`
   position: absolute;
   height: 100%;
   width: 100%;
 `;
+
+const { Marker } = MapView;
 
 /**
  * In this screen you can choose where your "Home" location for the reminders.
@@ -30,9 +32,10 @@ class MapScreen extends React.Component {
   scrollToCurrentLocation = async () => {
     const coords = await getCurrentPositionAsync();
     this.props.changeMapRegion(coords);
+    this.mapView.animateToCoordinate(coords);
   };
 
-  changeMapRegionDebounced = debounce(this.props.changeMapRegion, 50);
+  changeMapRegionDebounced = throttle(this.props.changeMapRegion, 500);
 
   render() {
     const { mapRegion } = this.props;
@@ -40,12 +43,14 @@ class MapScreen extends React.Component {
     return (
       <View style={{ flex: 1 }}>
         <MapView
+          ref={mapView => this.mapView = mapView}
           style={{ flex: 1 }}
-          region={mapRegion}
-          onRegionChangeComplete={(e) => this.changeMapRegionDebounced(e)}
-          // Cancel debounce each time the user pans the screen to avoid shakes.
-          onRegionChange={this.changeMapRegionDebounced.cancel}
+          initialRegion={mapRegion}
+          onRegionChange={(e) => this.changeMapRegionDebounced(e)}
         >
+          <Marker
+            coordinate={mapRegion}
+          />
         </MapView>
         <IconBar>
           <Icon
