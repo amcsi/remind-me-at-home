@@ -1,4 +1,5 @@
 import { CHANGE_MAP_REGION } from '../actions/types';
+import { isEqual, pick } from 'lodash';
 
 const INITIAL_STATE = {
   latitude: 51.5074,
@@ -10,7 +11,12 @@ const INITIAL_STATE = {
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
     case CHANGE_MAP_REGION:
-      return { ...INITIAL_STATE, ...state, latitude: action.payload.latitude, longitude: action.payload.longitude };
+      const coordinateProperties = ['latitude', 'longitude'];
+      const newCoordinates = pick(action.payload, coordinateProperties);
+      if (isEqual(pick(state, coordinateProperties), newCoordinates)) {
+        return state;
+      }
+      return { ...INITIAL_STATE, ...state, ...newCoordinates };
 
     default:
       return state;

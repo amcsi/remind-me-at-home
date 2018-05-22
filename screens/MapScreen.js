@@ -32,11 +32,15 @@ class MapScreen extends React.Component {
   };
 
   render() {
-    const { mapRegion } = this.props;
+    const { changeMapRegion, mapRegion } = this.props;
 
     return (
       <View style={{ flex: 1 }}>
-        <MapView style={{ flex: 1 }} region={mapRegion}>
+        <MapView
+          style={{ flex: 1 }}
+          region={mapRegion}
+          onRegionChangeComplete={changeMapRegion}
+        >
         </MapView>
         <IconBar>
           <Icon
