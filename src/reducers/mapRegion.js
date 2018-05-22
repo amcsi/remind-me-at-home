@@ -14,6 +14,7 @@ export default function (state = INITIAL_STATE, action) {
       const coordinateProperties = ['latitude', 'longitude'];
       const newCoordinates = pick(action.payload, coordinateProperties);
       if (isEqual(pick(state, coordinateProperties), newCoordinates)) {
+        // Coordinates are the same; do not change them to avoid state change events.
         return state;
       }
       return { ...INITIAL_STATE, ...state, ...newCoordinates };

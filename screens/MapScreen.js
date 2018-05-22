@@ -6,6 +6,7 @@ import { changeMapRegion } from '../src/actions/MapActions';
 import { Icon } from 'react-native-elements';
 import { View } from 'react-native';
 import styled from 'styled-components';
+import { debounce } from 'lodash';
 
 const IconBar = styled.View`
   position: absolute;
@@ -31,15 +32,19 @@ class MapScreen extends React.Component {
     this.props.changeMapRegion(coords);
   };
 
+  changeMapRegionDebounced = debounce(this.props.changeMapRegion, 50);
+
   render() {
-    const { changeMapRegion, mapRegion } = this.props;
+    const { mapRegion } = this.props;
 
     return (
       <View style={{ flex: 1 }}>
         <MapView
           style={{ flex: 1 }}
           region={mapRegion}
-          onRegionChangeComplete={changeMapRegion}
+          onRegionChangeComplete={(e) => this.changeMapRegionDebounced(e)}
+          // Cancel debounce each time the user pans the screen to avoid shakes.
+          onRegionChange={this.changeMapRegionDebounced.cancel}
         >
         </MapView>
         <IconBar>
