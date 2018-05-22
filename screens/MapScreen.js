@@ -6,7 +6,6 @@ import { changeMapRegion } from '../src/actions/MapActions';
 import { Icon } from 'react-native-elements';
 import { View } from 'react-native';
 import styled from 'styled-components';
-import { throttle } from 'lodash';
 
 const IconBar = styled.View`
   position: absolute;
@@ -35,8 +34,6 @@ class MapScreen extends React.Component {
     this.mapView.animateToCoordinate(coords);
   };
 
-  changeMapRegionDebounced = throttle(this.props.changeMapRegion, 500);
-
   render() {
     const { mapRegion } = this.props;
 
@@ -46,7 +43,7 @@ class MapScreen extends React.Component {
           ref={mapView => this.mapView = mapView}
           style={{ flex: 1 }}
           initialRegion={mapRegion}
-          onRegionChange={(e) => this.changeMapRegionDebounced(e)}
+          onRegionChange={this.props.changeMapRegion}
         >
           <Marker
             coordinate={mapRegion}
