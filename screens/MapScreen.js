@@ -20,7 +20,7 @@ const ButtonBar = styled.View`
   right: 0;
   display: flex;
   align-items: center;
-`
+`;
 
 const { Marker } = MapView;
 
@@ -42,6 +42,10 @@ class MapScreen extends React.Component {
     this.props.changeMapRegion(coords);
     this.mapView.animateToCoordinate(coords);
   };
+
+  onPickHomePress = () => {
+    this.props.navigation.navigate('main');
+  }
 
   render() {
     const { mapRegion } = this.props;
@@ -70,6 +74,7 @@ class MapScreen extends React.Component {
             rounded
             title="Pick Home"
             containerViewStyle={styles.buttonContainer}
+            onPress={this.onPickHomePress}
           />
         </ButtonBar>
       </View>
