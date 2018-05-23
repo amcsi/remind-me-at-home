@@ -3,8 +3,8 @@ import { MapView } from 'expo';
 import { connect } from 'react-redux';
 import { getCurrentPositionAsync } from '../src/location';
 import { changeMapRegion } from '../src/actions/MapActions';
-import { Icon } from 'react-native-elements';
-import { View } from 'react-native';
+import { Icon, Button } from 'react-native-elements';
+import { StyleSheet, View } from 'react-native';
 import styled from 'styled-components';
 
 const IconBar = styled.View`
@@ -12,6 +12,15 @@ const IconBar = styled.View`
   height: 100%;
   width: 100%;
 `;
+
+const ButtonBar = styled.View`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+`
 
 const { Marker } = MapView;
 
@@ -56,11 +65,30 @@ class MapScreen extends React.Component {
             onPress={this.scrollToCurrentLocation}
           />
         </IconBar>
+        <ButtonBar>
+          <Button
+            rounded
+            title="Pick Home"
+            containerViewStyle={styles.buttonContainer}
+          />
+        </ButtonBar>
       </View>
     );
     // TODO loading spinner when moving to user's current location.
   }
 }
+
+const styles = StyleSheet.create({
+  buttonContainer: {
+    position: 'absolute',
+    bottom: 10,
+    left: 'auto',
+    right: 'auto',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
 
 function mapStateToProps({ mapRegion }) {
   return {
